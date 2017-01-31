@@ -3,6 +3,7 @@ package jonathancaryl.org.base.components;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
@@ -24,4 +25,6 @@ public interface ApplicationComponent {
     Application getApplication();
 
     Picasso providePicasso();
+
+    Gson provideGson();
 }

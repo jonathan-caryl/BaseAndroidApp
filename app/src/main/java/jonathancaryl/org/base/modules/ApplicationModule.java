@@ -3,6 +3,8 @@ package jonathancaryl.org.base.modules;
 import android.app.Application;
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
@@ -36,4 +38,13 @@ public class ApplicationModule {
     Picasso providePicasso(@ApplicationContext Context context) {
         return Picasso.with(context);
     }
+
+    @Provides
+    @Singleton
+    Gson provideGson() {
+        return new GsonBuilder()
+                .setPrettyPrinting()
+                .create();
+    }
+
 }
