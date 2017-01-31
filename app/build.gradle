@@ -29,6 +29,8 @@ dependencies {
     compile "com.google.dagger:dagger:${dagger2Version}"
     compile 'com.google.code.gson:gson:2.8.0'
     annotationProcessor "com.google.dagger:dagger-compiler:${dagger2Version}"
+    compile "com.jakewharton:butterknife:${butterKnifeVersion}"
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
     compile 'com.squareup.picasso:picasso:2.5.2'
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'javax.inject:javax.inject:1'

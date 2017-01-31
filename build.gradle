@@ -19,6 +19,7 @@ allprojects {
 }
 
 ext {
+    butterKnifeVersion = '8.5.1'
     dagger2Version = '2.8'
     supportLibVersion = '25.1.0'
 }
