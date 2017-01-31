@@ -8,11 +8,18 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends BaseInjectedActivity {
+import com.squareup.picasso.Picasso;
+
+import javax.inject.Inject;
+
+public class MainActivity extends BaseActivity {
+    @Inject
+    Picasso picasso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivityComponent().inject(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

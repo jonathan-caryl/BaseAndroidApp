@@ -3,6 +3,8 @@ package jonathancaryl.org.base.components;
 import android.app.Application;
 import android.content.Context;
 
+import com.squareup.picasso.Picasso;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -20,4 +22,6 @@ public interface ApplicationComponent {
     Context getContext();
 
     Application getApplication();
+
+    Picasso providePicasso();
 }

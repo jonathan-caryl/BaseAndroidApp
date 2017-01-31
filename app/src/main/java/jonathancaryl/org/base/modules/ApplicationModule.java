@@ -3,6 +3,10 @@ package jonathancaryl.org.base.modules;
 import android.app.Application;
 import android.content.Context;
 
+import com.squareup.picasso.Picasso;
+
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
 import jonathancaryl.org.base.annotations.ApplicationContext;
@@ -25,5 +29,11 @@ public class ApplicationModule {
     @Provides
     Application provideApplication() {
         return mApplication;
+    }
+
+    @Provides
+    @Singleton
+    Picasso providePicasso(@ApplicationContext Context context) {
+        return Picasso.with(context);
     }
 }

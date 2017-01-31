@@ -28,6 +28,7 @@ dependencies {
     compile "com.android.support:design:${supportLibVersion}"
     compile "com.google.dagger:dagger:${dagger2Version}"
     annotationProcessor "com.google.dagger:dagger-compiler:${dagger2Version}"
+    compile 'com.squareup.picasso:picasso:2.5.2'
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'javax.inject:javax.inject:1'
     testCompile 'junit:junit:4.12'
