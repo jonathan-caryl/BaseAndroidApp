@@ -22,7 +22,7 @@ allprojects {
 ext {
     butterKnifeVersion = '8.5.1'
     dagger2Version = '2.8'
-    supportLibVersion = '25.1.0'
+    supportLibVersion = '25.1.1'
 }
 
 task clean(type: Delete) {
