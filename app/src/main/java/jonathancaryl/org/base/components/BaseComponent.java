@@ -6,17 +6,12 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
-import javax.inject.Singleton;
-
-import dagger.Component;
 import jonathancaryl.org.base.api.ApiService;
-import jonathancaryl.org.base.modules.ApplicationModule;
 import jonathancaryl.org.base.BaseApplication;
 import jonathancaryl.org.base.annotations.ApplicationContext;
+import timber.log.Timber;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
+public interface BaseComponent {
 
     void inject(BaseApplication baseApplication);
 
@@ -30,4 +25,6 @@ public interface ApplicationComponent {
     ApiService provideApiService();
 
     Gson provideGson();
+
+    Timber provideTimber();
 }

@@ -115,10 +115,10 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Picasso providePicasso(@ApplicationContext Context context, OkHttpClient client) {
+    Picasso.Builder providePicassoBuilder(@ApplicationContext Context context,
+                                          OkHttpClient okHttpClient) {
         return new Picasso.Builder(context)
-                .downloader(new OkHttp3Downloader(client))
-                .build();
+                .downloader(new OkHttp3Downloader(okHttpClient));
     }
 
     @Provides
