@@ -9,6 +9,7 @@ import com.squareup.picasso.Picasso;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import jonathancaryl.org.base.api.ApiService;
 import jonathancaryl.org.base.modules.ApplicationModule;
 import jonathancaryl.org.base.BaseApplication;
 import jonathancaryl.org.base.annotations.ApplicationContext;
@@ -25,6 +26,8 @@ public interface ApplicationComponent {
     Application getApplication();
 
     Picasso providePicasso();
+
+    ApiService provideApiService();
 
     Gson provideGson();
 }

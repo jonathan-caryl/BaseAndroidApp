@@ -6,6 +6,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.picasso.OkHttp3Downloader;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -15,11 +16,12 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import jonathancaryl.org.base.annotations.ApplicationContext;
+import jonathancaryl.org.base.api.ApiService;
 import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -70,13 +72,39 @@ public class ApplicationModule {
     @Provides
     @Singleton
     GsonConverterFactory provideGsonConverterFactory(Gson gson) {
-    return GsonConverterFactory.create(gson);
+        return GsonConverterFactory.create(gson);
     }
 
     @Provides
     @Singleton
-    RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
-    return RxJavaCallAdapterFactory.create();
+    RxJava2CallAdapterFactory provideRxJavaCallAdapterFactory() {
+        return RxJava2CallAdapterFactory.create();
+    }
+
+    @Provides
+    @Singleton
+    String provideBaseUrl() {
+        return "https://api.github.com";
+    }
+
+    @Provides
+    @Singleton
+    Retrofit provideRetrofit(OkHttpClient okHttpClient,
+                             GsonConverterFactory gsonConverterFactory,
+                             RxJava2CallAdapterFactory rxJava2CallAdapterFactory,
+                             String baseUrl) {
+        return new Retrofit.Builder()
+                .client(okHttpClient)
+                .addConverterFactory(gsonConverterFactory)
+                .addCallAdapterFactory(rxJava2CallAdapterFactory)
+                .baseUrl(baseUrl)
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    ApiService provideApiService(Retrofit retrofit) {
+        return retrofit.create(ApiService.class);
     }
 
     @Provides

@@ -12,9 +12,18 @@ import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import jonathancaryl.org.base.api.ApiService;
+import jonathancaryl.org.base.model.Issue;
+import timber.log.Timber;
+
 public class MainActivity extends BaseActivity {
-    @Inject
-    Picasso picasso;
+    @Inject Picasso picasso;
+    @Inject ApiService apiService;
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +34,25 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> getThings());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        compositeDisposable.dispose();
+    }
+
+    private void getThings() {
+        final Disposable disposable = apiService.getIssues()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(issues -> {
+                    for (Issue issue: issues) {
+                        Timber.d("%s", issue.title);
+                    }
+                }, Timber::e);
+        compositeDisposable.add(disposable);
     }
 
     @Override
