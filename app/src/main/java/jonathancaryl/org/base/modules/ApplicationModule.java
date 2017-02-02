@@ -24,6 +24,9 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static jonathancaryl.org.base.BuildConfig.API_KEY_NAME;
+import static jonathancaryl.org.base.BuildConfig.API_KEY_VALUE;
+
 @Module
 public class ApplicationModule {
     private static final int DISK_CACHE_SIZE = 50 * 1024 * 1024;
@@ -57,6 +60,9 @@ public class ApplicationModule {
         return chain -> {
             Request.Builder builder = chain.request().newBuilder();
             builder.addHeader("Accept", "application/json");
+            if (API_KEY_NAME != null && API_KEY_VALUE != null) {
+                builder.addHeader(API_KEY_NAME, API_KEY_VALUE);
+            }
             return chain.proceed(builder.build());
         };
     }

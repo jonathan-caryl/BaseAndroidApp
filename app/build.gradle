@@ -5,6 +5,9 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
     defaultConfig {
+        buildConfigField "String", "API_KEY_NAME", findProperty('API_KEY_NAME')
+        buildConfigField "String", "API_KEY_VALUE", findProperty('API_KEY_VALUE')
+
         applicationId "jonathancaryl.org.base"
         minSdkVersion 19
         targetSdkVersion 25
