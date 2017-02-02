@@ -19,6 +19,8 @@ import okhttp3.Cache;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class ApplicationModule {
@@ -64,6 +66,17 @@ public class ApplicationModule {
                 .cache(cache)
                 .addNetworkInterceptor(interceptor)
                 .build();
+    }
+    @Provides
+    @Singleton
+    GsonConverterFactory provideGsonConverterFactory(Gson gson) {
+    return GsonConverterFactory.create(gson);
+    }
+
+    @Provides
+    @Singleton
+    RxJavaCallAdapterFactory provideRxJavaCallAdapterFactory() {
+    return RxJavaCallAdapterFactory.create();
     }
 
     @Provides
